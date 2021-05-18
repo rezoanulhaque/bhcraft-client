@@ -1,14 +1,14 @@
-const express = require('express')
-require('dotenv').config()
+const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
-const app = express()
+const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-const port = 5000
+const port = 5000;
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.mdb7s.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -130,17 +130,10 @@ app.patch('/updatedInfo', (req, res) =>{
   app.delete('/deleteProduct/:id', (req, res) =>{
     const id=req.params.id
     shipmentCollection.deleteOne({_id: ObjectId(id)})
-    .then(result => {
-      res.send(result.deletedCount > 0);
-    })
+    .then(result => 
+      res.send(result.deletedCount > 0))
   })
-  app.get('/j', (req, res) => {
-    res.send('Hi World!')
-  })
-  console.log('connected')
 });
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
-app.listen(process.env.DB_PORT || port)
+
+app.listen(process.env.DB_PORT || port);
