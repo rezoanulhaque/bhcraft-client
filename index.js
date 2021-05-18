@@ -136,4 +136,4 @@ app.patch('/updatedInfo', (req, res) =>{
 });
 
 
-app.listen(process.env.DB_PORT || port);
+app.listen(process.env.PORT || port);
